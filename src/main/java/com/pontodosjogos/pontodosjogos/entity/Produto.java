@@ -17,6 +17,8 @@ public class Produto {
 
     private Double preco;
 
+    private Integer quantidadeEmEstoque;
+
 
 
 }

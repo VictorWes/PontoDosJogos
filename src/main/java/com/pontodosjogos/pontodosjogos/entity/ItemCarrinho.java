@@ -1,7 +1,13 @@
 package com.pontodosjogos.pontodosjogos.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "item_carrinho")
 public class ItemCarrinho {
