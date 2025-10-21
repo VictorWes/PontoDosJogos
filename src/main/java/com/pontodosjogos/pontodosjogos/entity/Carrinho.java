@@ -18,7 +18,7 @@ public class Carrinho {
     @Enumerated(EnumType.STRING)
     private StatusCarrinho statusCarrinho;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

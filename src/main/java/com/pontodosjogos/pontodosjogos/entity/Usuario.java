@@ -2,6 +2,8 @@ package com.pontodosjogos.pontodosjogos.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -15,5 +17,8 @@ public class Usuario {
     private String email;
 
     private String senha;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Carrinho> carrinhos;
 
 }
