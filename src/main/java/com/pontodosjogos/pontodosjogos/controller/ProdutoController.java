@@ -1,4 +1,4 @@
 package com.pontodosjogos.pontodosjogos.controller;
 
-public class Produto {
+public class ProdutoController {
 }
