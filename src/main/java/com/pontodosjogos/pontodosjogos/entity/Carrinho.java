@@ -2,10 +2,16 @@ package com.pontodosjogos.pontodosjogos.entity;
 
 import com.pontodosjogos.pontodosjogos.enums.StatusCarrinho;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "carrinho")
 public class Carrinho {

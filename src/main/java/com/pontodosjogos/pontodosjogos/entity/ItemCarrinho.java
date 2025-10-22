@@ -1,10 +1,11 @@
 package com.pontodosjogos.pontodosjogos.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Getter
+@Setter
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,11 +1,17 @@
 package com.pontodosjogos.pontodosjogos.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
+@Builder
 @Entity
 @Table(name = "usuario")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario {
 
     @Id
