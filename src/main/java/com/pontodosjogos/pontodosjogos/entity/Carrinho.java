@@ -4,6 +4,7 @@ import com.pontodosjogos.pontodosjogos.enums.StatusCarrinho;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "carrinho")
@@ -21,5 +22,8 @@ public class Carrinho {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemCarrinho> itens;
 
 }
