@@ -4,27 +4,23 @@ import com.pontodosjogos.pontodosjogos.controller.request.ProdutoRequest;
 import com.pontodosjogos.pontodosjogos.controller.response.ProdutoResponse;
 import com.pontodosjogos.pontodosjogos.entity.Produto;
 import lombok.experimental.UtilityClass;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
-@UtilityClass
-public class ProdutoMapper {
+import java.util.List;
 
-    public static Produto toProduto(ProdutoRequest produtoRequest){
-        return Produto.builder()
-                .nome(produtoRequest.nome())
-                .descricao(produtoRequest.descricao())
-                .preco(produtoRequest.preco())
-                .quantidadeEmEstoque(produtoRequest.quantidadeEmEstoque())
-                .build();
-    }
+@Mapper(componentModel = "spring")
+public interface ProdutoMapper {
 
-    public static ProdutoResponse toReponse(Produto produto){
-        return ProdutoResponse.builder()
-                .id(produto.getId())
-                .nome(produto.getNome())
-                .descricao(produto.getDescricao())
-                .preco(produto.getPreco())
-                .quantidadeEmEstoque(produto.getQuantidadeEmEstoque())
-                .build();
-    }
+    Produto toEntity(ProdutoRequest requestDTO);
+
+    @Mapping(target = "id", ignore = true)
+    void updateEntityFromDto(ProdutoRequest requestDTO, @MappingTarget Produto produto);
+
+    ProdutoResponse toResponseDTO(Produto produto);
+
+    List<ProdutoResponse> toResponseDTOList(List<Produto> produtos);
+
 
 }
