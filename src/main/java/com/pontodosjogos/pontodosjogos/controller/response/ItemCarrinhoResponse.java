@@ -4,7 +4,12 @@ import lombok.Builder;
 
 @Builder
 public record ItemCarrinhoResponse(
-        Integer quantidade
+        Long id, // Para que o frontend possa remover/atualizar
+        Long produtoId, // ID do produto
+        String nomeProduto, // Nome para exibição
+        Integer quantidade,
+        Double precoUnitarioNaCompra,
+        Double subtotal
 ) {
 
 }

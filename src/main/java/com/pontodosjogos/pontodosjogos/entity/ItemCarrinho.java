@@ -27,6 +27,8 @@ public class ItemCarrinho {
 
     private Integer quantidade;
 
+    private Double precoUnitarioNaCompra;
+
 
 
 }

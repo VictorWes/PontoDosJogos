@@ -5,7 +5,8 @@ import lombok.Builder;
 @Builder
 public record ItemCarrinhoRequest(
         Long produtoId,
-        Integer quantidade
+        Integer quantidade,
+        Double precoUnitarioNaCompra
 ) {
 
 }
