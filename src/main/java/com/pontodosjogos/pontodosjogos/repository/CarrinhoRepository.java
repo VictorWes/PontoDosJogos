@@ -1,7 +1,14 @@
 package com.pontodosjogos.pontodosjogos.repository;
 
 import com.pontodosjogos.pontodosjogos.entity.Carrinho;
+import com.pontodosjogos.pontodosjogos.enums.StatusCarrinho;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface CarrinhoRepository extends JpaRepository<Carrinho, Long> {
+
+
+    Optional<Carrinho> findByUsuarioIdAndStatusCarrinho(Long usuarioId, StatusCarrinho status);
+
 }

@@ -3,6 +3,8 @@ package com.pontodosjogos.pontodosjogos.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Builder
@@ -27,7 +29,7 @@ public class ItemCarrinho {
 
     private Integer quantidade;
 
-    private Double precoUnitarioNaCompra;
+    private BigDecimal precoUnitarioNaCompra;
 
 
 
