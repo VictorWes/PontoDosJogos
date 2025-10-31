@@ -3,7 +3,6 @@ package com.pontodosjogos.pontodosjogos.controller.response;
 import lombok.Builder;
 
 @Builder
-public record LoginResponse(String Token,
-                            Long expiresIn
+public record LoginResponse(String Token
 ) {
 }
