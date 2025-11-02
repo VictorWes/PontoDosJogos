@@ -8,34 +8,57 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
-public interface EnderecoMapper {
 
-    // Instância estática para uso fora do Spring Context (útil em testes ou métodos default de outros mappers)
+public class EnderecoMapper {
+
+    // Assumimos que a Entidade Endereco tem todos os getters e setters
 
     // =================================================================
     // 1. Mapeamento de Requisição (Request) para Entidade (JPA) - CRIAÇÃO
+    // Equivalente a: Endereco toEntity(EnderecoRequest request)
     // =================================================================
-
-    // Usado ao adicionar um novo endereço. O campo 'usuario' (FK) será setado no Service.
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "usuario", ignore = true) // Ignora a Entidade Usuario (o Service fará a vinculação)
-    Endereco toEntity(EnderecoRequest request);
+    public Endereco toEntity(EnderecoRequest request) {
+        return Endereco.builder()
+                .rua(request.rua())
+                .numero(request.numero())
+                .complemento(request.complemento())
+                .bairro(request.bairro())
+                .cidade(request.cidade())
+                .estado(request.estado())
+                .cep(request.cep())
+                // 'id' e 'usuario' são ignorados/setados no Service
+                .build();
+    }
 
     // =================================================================
     // 2. Mapeamento de Entidade (JPA) para Resposta (Response) - BUSCA
+    // Equivalente a: EnderecoResponse toResponse(Endereco endereco)
     // =================================================================
-
-    // Usado ao retornar o endereço para o frontend.
-    EnderecoResponse toResponse(Endereco endereco);
+    public EnderecoResponse toResponse(Endereco endereco) {
+        return EnderecoResponse.builder()
+                .rua(endereco.getRua())
+                .numero(endereco.getNumero())
+                .complemento(endereco.getComplemento())
+                .bairro(endereco.getBairro())
+                .cidade(endereco.getCidade())
+                .estado(endereco.getEstado())
+                .cep(endereco.getCep())
+                .build();
+    }
 
     // =================================================================
     // 3. Mapeamento de Fusão (Request para Entidade existente) - ATUALIZAÇÃO
+    // Equivalente a: void updateEntityFromDto(EnderecoRequest request, @MappingTarget Endereco endereco)
     // =================================================================
-
-    // Usado no EnderecoService para o método 'atualizarEndereco'.
-    // Copia os dados do DTO para a Entidade já buscada.
-    @Mapping(target = "id", ignore = true) // Protege o ID de ser sobrescrito
-    @Mapping(target = "usuario", ignore = true) // Protege a FK de ser sobrescrita/desvinculada
-    void updateEntityFromDto(EnderecoRequest request, @MappingTarget Endereco endereco);
+    public void updateEntityFromDto(EnderecoRequest request, Endereco endereco) {
+        // Copia os dados do DTO para a Entidade existente.
+        // O ID e o USUARIO (FK) são preservados.
+        endereco.setRua(request.rua());
+        endereco.setNumero(request.numero());
+        endereco.setComplemento(request.complemento());
+        endereco.setBairro(request.bairro());
+        endereco.setCidade(request.cidade());
+        endereco.setEstado(request.estado());
+        endereco.setCep(request.cep());
+    }
 }

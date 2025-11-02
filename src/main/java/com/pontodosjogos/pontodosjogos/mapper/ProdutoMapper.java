@@ -9,18 +9,46 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
-public interface ProdutoMapper {
 
-    Produto toEntity(ProdutoRequest requestDTO);
+public class ProdutoMapper {
 
-    @Mapping(target = "id", ignore = true)
-    void updateEntityFromDto(ProdutoRequest requestDTO, @MappingTarget Produto produto);
+    public Produto toEntity(ProdutoRequest requestDTO) {
 
-    ProdutoResponse toResponseDTO(Produto produto);
+        return Produto.builder()
+                .nome(requestDTO.nome())
+                .descricao(requestDTO.descricao())
+                .preco(requestDTO.preco())
+                .quantidadeEmEstoque(requestDTO.quantidadeEmEstoque())
+                .build();
+    }
 
-    List<ProdutoResponse> toResponseDTOList(List<Produto> produtos);
+
+    public void updateEntityFromDto(ProdutoRequest requestDTO, Produto produto) {
+        produto.setNome(requestDTO.nome());
+        produto.setDescricao(requestDTO.descricao());
+        produto.setPreco(requestDTO.preco());
+        produto.setQuantidadeEmEstoque(requestDTO.quantidadeEmEstoque());
+
+    }
+
+    public ProdutoResponse toResponseDTO(Produto produto) {
+        return ProdutoResponse.builder()
+                .id(produto.getId())
+                .nome(produto.getNome())
+                .descricao(produto.getDescricao())
+                .preco(produto.getPreco())
+                .quantidadeEmEstoque(produto.getQuantidadeEmEstoque())
+                .build();
+    }
+
+
+    public List<ProdutoResponse> toResponseDTOList(List<Produto> produtos) {
+        return produtos.stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
 
 
 }

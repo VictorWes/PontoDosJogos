@@ -7,23 +7,49 @@ import com.pontodosjogos.pontodosjogos.entity.ItemCarrinho;
 import com.pontodosjogos.pontodosjogos.entity.Produto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface ItemCarrinhoMapper {
+import java.math.BigDecimal;
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "carrinho", source = "carrinho") //
-    @Mapping(target = "produto", source = "produto")   //
-    @Mapping(target = "precoUnitarioNaCompra", source = "produto.preco")
-    @Mapping(target = "quantidade", source = "request.quantidade")
+@Component
+public class ItemCarrinhoMapper {
 
-    ItemCarrinho toEntity(ItemCarrinhoRequest request, Carrinho carrinho, Produto produto);
+    public  ItemCarrinho toEntity(ItemCarrinhoRequest request, Carrinho carrinho, Produto produto) {
+
+        // Simula o mapeamento do MapStruct
+        return ItemCarrinho.builder()
+                .carrinho(carrinho)               // source = "carrinho"
+                .produto(produto)                 // source = "produto"
+                .quantidade(request.quantidade()) // source = "request.quantidade"
+                // O CRUCIAL: Mapeia o preço atual do Produto (SNAPSHOT)
+                .precoUnitarioNaCompra(produto.getPreco()) // source = "produto.preco"
+                // O ID é ignorado
+                .build();
+    }
 
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "produtoId", source = "produto.id")
-    @Mapping(target = "nomeProduto", source = "produto.nome")
-    @Mapping(target = "precoUnitario", source = "precoUnitarioNaCompra")
-    @Mapping(target = "subtotal", expression = "java(itemCarrinho.getPrecoUnitarioNaCompra().multiply(new BigDecimal(itemCarrinho.getQuantidade())))")
-    ItemCarrinhoResponse toResponseDTO(ItemCarrinho itemCarrinho);
+    // =================================================================
+    // 2. Entidade (JPA) para DTO de Resposta (Response) - VISUALIZAÇÃO
+    // Equivalente a: ItemCarrinhoResponse toResponseDTO(ItemCarrinho itemCarrinho)
+    // =================================================================
+    /**
+     * Mapeia a Entidade ItemCarrinho para o DTO de Resposta, incluindo o subtotal calculado.
+     */
+    public ItemCarrinhoResponse toResponseDTO(ItemCarrinho itemCarrinho) {
+
+        // CÁLCULO MANUAL DO SUBTOTAL (equivalente à 'expression' do MapStruct)
+        BigDecimal quantidade = new BigDecimal(itemCarrinho.getQuantidade());
+        BigDecimal preco = itemCarrinho.getPrecoUnitarioNaCompra();
+        BigDecimal subtotal = preco.multiply(quantidade);
+
+        return ItemCarrinhoResponse.builder()
+                .id(itemCarrinho.getId())                                   // source = "id"
+                .produtoId(itemCarrinho.getProduto().getId())               // source = "produto.id"
+                .nomeProduto(itemCarrinho.getProduto().getNome())           // source = "produto.nome"
+                .quantidade(itemCarrinho.getQuantidade())
+                .precoUnitarioNaCompra(itemCarrinho.getPrecoUnitarioNaCompra())
+                // O MapStruct usava 'expression', fazemos o cálculo manual aqui:
+                .subtotal(subtotal.doubleValue()) // Assumindo que o subtotal no Response é Double
+                .build();
+    }
 }
