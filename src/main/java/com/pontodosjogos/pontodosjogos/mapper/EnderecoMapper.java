@@ -12,7 +12,6 @@ import org.mapstruct.factory.Mappers;
 public interface EnderecoMapper {
 
     // Instância estática para uso fora do Spring Context (útil em testes ou métodos default de outros mappers)
-    EnderecoMapper INSTANCE = Mappers.getMapper(EnderecoMapper.class);
 
     // =================================================================
     // 1. Mapeamento de Requisição (Request) para Entidade (JPA) - CRIAÇÃO

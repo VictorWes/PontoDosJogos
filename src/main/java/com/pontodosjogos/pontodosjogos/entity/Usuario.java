@@ -22,6 +22,7 @@ public class Usuario {
 
     private String email;
 
+    @Column(name = "senha_hash")
     private String senha;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)

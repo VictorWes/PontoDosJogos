@@ -57,7 +57,7 @@ public class CarrinhoService {
 
             return carrinhoRepository.save(
                     Carrinho.builder()
-                            .dataCriacao(java.time.LocalDate.now())
+                            .dataCriacao(java.time.LocalDateTime.now())
                             .statusCarrinho(StatusCarrinho.ABERTO)
                             .usuario(usuario) // MOCK: substitua por Usuario real
                             .build()

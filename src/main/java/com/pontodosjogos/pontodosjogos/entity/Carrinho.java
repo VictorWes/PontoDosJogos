@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,7 +21,7 @@ public class Carrinho {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @Enumerated(EnumType.STRING)
     private StatusCarrinho statusCarrinho;

@@ -29,6 +29,7 @@ public class ItemCarrinho {
 
     private Integer quantidade;
 
+    @Column(name = "preco_unitario_na_compra", nullable = false, precision = 10, scale = 2)
     private BigDecimal precoUnitarioNaCompra;
 
 
