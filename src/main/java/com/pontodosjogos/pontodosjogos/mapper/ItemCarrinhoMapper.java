@@ -5,6 +5,7 @@ import com.pontodosjogos.pontodosjogos.controller.response.ItemCarrinhoResponse;
 import com.pontodosjogos.pontodosjogos.entity.Carrinho;
 import com.pontodosjogos.pontodosjogos.entity.ItemCarrinho;
 import com.pontodosjogos.pontodosjogos.entity.Produto;
+import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
+@RequiredArgsConstructor
 public class ItemCarrinhoMapper {
 
     public  ItemCarrinho toEntity(ItemCarrinhoRequest request, Carrinho carrinho, Produto produto) {

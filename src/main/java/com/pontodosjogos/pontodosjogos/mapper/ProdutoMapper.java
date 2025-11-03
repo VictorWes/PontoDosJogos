@@ -3,15 +3,18 @@ package com.pontodosjogos.pontodosjogos.mapper;
 import com.pontodosjogos.pontodosjogos.controller.request.ProdutoRequest;
 import com.pontodosjogos.pontodosjogos.controller.response.ProdutoResponse;
 import com.pontodosjogos.pontodosjogos.entity.Produto;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Component
+@RequiredArgsConstructor
 public class ProdutoMapper {
 
     public Produto toEntity(ProdutoRequest requestDTO) {

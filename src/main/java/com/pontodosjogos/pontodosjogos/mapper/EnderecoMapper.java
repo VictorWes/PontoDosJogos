@@ -3,12 +3,16 @@ package com.pontodosjogos.pontodosjogos.mapper;
 import com.pontodosjogos.pontodosjogos.controller.request.EnderecoRequest;
 import com.pontodosjogos.pontodosjogos.controller.response.EnderecoResponse;
 import com.pontodosjogos.pontodosjogos.entity.Endereco;
+import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
 
+@Component
+@RequiredArgsConstructor
 public class EnderecoMapper {
 
     // Assumimos que a Entidade Endereco tem todos os getters e setters
