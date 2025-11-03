@@ -27,14 +27,14 @@ public class SecurityConfig {
         return http
 
                 .csrf(csrf -> csrf.ignoringRequestMatchers(
-                        "/desafio/auth/register",
-                        "/desafio/auth/login"
+                        "/api/auth/register",
+                        "/api/auth/login"
                 ))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/desafio/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/desafio/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                         // ... (outras regras)
                         .anyRequest().authenticated()
                 )

@@ -23,7 +23,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         String uri = request.getRequestURI();
 
-        if (uri.endsWith("/desafio/auth/register") || uri.endsWith("/desafio/auth/login")) {
+        if (uri.endsWith("/api/auth/register") || uri.endsWith("/api/auth/login")) {
             filterChain.doFilter(request, response);
             return;
         }
