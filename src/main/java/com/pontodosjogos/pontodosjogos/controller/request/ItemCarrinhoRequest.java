@@ -7,8 +7,7 @@ import java.math.BigDecimal;
 @Builder
 public record ItemCarrinhoRequest(
         Long produtoId,
-        Integer quantidade,
-        BigDecimal precoUnitarioNaCompra
+        Integer quantidade
 ) {
 
 }
