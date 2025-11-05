@@ -29,7 +29,7 @@ public class Usuario implements UserDetails {
     private String senha;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Carrinho> carrinhos;
+    private List<Carrinho> carrinhos = new java.util.ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Endereco> enderecos;
