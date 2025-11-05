@@ -60,6 +60,7 @@ public class CarrinhoService {
                             .dataCriacao(java.time.LocalDateTime.now())
                             .statusCarrinho(StatusCarrinho.ABERTO)
                             .usuario(usuario) // MOCK: substitua por Usuario real
+                            .itens(new java.util.ArrayList<>())
                             .build()
             );
         }
